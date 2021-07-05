@@ -40,21 +40,23 @@ class MCTS:
         for i in range(self.total_iterations):
             node = self.select(self.root)
             new_move = self.expand(node)
-            self.simulate(new_move)
 
+            self.simulate(new_move)
             self.back_prop(new_move)
 
-
-
     def expand(self, node):
-        new_move = Node(random.choice(
-            list(
-                {-2, -1, 0, 1, 2} - node.get_moves(),
-            )
-        ))
+        new_move = Node(
+            random.choice(
+                list(
+                    {-2, -1, 0, 1, 2} - node.get_moves(),
+                )
+            ),
+            node,
+        )
         node.children.append(new_move)
         return new_move
 
+    # def simulate(self, ) wait...on avg this thing will move nowhere :/
     # getter
     def select(self, node):
         if len(node.children) == 0:
@@ -76,7 +78,9 @@ if __name__ == "__main__":
     moves = []
 
     while not env.finished():
-        ts = MCTS(new_index) # can optimize by retaining tree later...maybe another init func
+        ts = MCTS(
+            new_index
+        )  # can optimize by retaining tree later...maybe another init func
         new_index = env.move(ts.search())
         moves.append(str(new_index))
         num_steps += 1
