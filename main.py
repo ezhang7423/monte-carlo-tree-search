@@ -116,14 +116,15 @@ if __name__ == "__main__":
     new_index = 0
     moves = ["0"]
 
+    print("Searching for solution")
     while not env.finished():
-        print("Finding another step...")
         ts = MCTS(
             new_index
         )  # can optimize by retaining tree later...maybe another init func
         new_index = env.move(ts.search())
         moves.append(str(new_index))
         num_steps += 1
+        print("Found step...")
 
     print(f"Solution found in {num_steps} number of steps")
     print(f'Indices: {" -> ".join(moves)}')
