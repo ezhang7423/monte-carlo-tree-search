@@ -126,5 +126,5 @@ if __name__ == "__main__":
         num_steps += 1
         print("Found step...")
 
-    print(f"Solution found in {num_steps} number of steps")
+    print(f"Solution found in {num_steps} number of steps (optimal is 7)")
     print(f'Indices: {" -> ".join(moves)}')
